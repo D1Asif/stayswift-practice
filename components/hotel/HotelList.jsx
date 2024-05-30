@@ -2,8 +2,9 @@ import { getAllHotels } from "@/database/query";
 import HotelCard from "./HotelCard";
 import NoHotels from "./NoHotels";
 
-const HotelList = async () => {
-  const allHotels = await getAllHotels();
+const HotelList = async ({destination, checkin, checkout}) => {
+  const allHotels = await getAllHotels(destination, checkin, checkout);
+  // console.log(allHotels);
   
   return (
     <div className="col-span-9">
@@ -11,7 +12,7 @@ const HotelList = async () => {
         {
           allHotels?.length > 0 ? (
             allHotels.map((hotel) => (
-              <HotelCard key={hotel?.id} hotelInfo={hotel} />
+              <HotelCard key={hotel?.id} hotelInfo={hotel} checkin={checkin} checkout={checkout} />
             ))
           ) : (
             <NoHotels />

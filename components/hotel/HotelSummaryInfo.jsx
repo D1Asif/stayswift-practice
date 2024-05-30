@@ -2,8 +2,11 @@ import Link from "next/link";
 import HotelRating from "./HotelRating";
 import HotelReview from "./HotelReview";
 
-const HotelSummaryInfo = async ({ fromListPage, info }) => {
-
+const HotelSummaryInfo = async ({ fromListPage, info, checkin, checkout }) => {
+  let params = "";
+  if (checkin && checkout) {
+    params=`?checkin=${checkin}&checkout=${checkout}`;
+  }
   return (
     <>
       <div className={fromListPage ? "flex-1" : "flex-1 container"}>
@@ -14,6 +17,7 @@ const HotelSummaryInfo = async ({ fromListPage, info }) => {
         <div className="flex gap-2 items-center my-4">
           <HotelRating hotelId={info?.id} />
           <HotelReview hotelId={info?.id} />
+          {info?.isBooked && <span>Sold out</span>}
         </div>
         <span className="bg-yellow-400 p-1 rounded-md">{info?.propertyCategory} star Hotel</span>
       </div>
@@ -23,9 +27,9 @@ const HotelSummaryInfo = async ({ fromListPage, info }) => {
         <p className=" text-right">Per Night for 1 Room</p>
         {
           fromListPage ? (
-            <Link href={`hotels/${info?.id}`} className="btn-primary ">Details</Link>
+            <Link href={`hotels/${info?.id}${params}`} className="btn-primary ">Details</Link>
           ) : (
-            <Link href={`/hotels/${info?.id}/payment`} className="btn-primary ">Book</Link>
+            <Link href={info?.isBooked ? "#" : `/hotels/${info?.id}/payment${params}`} className={info?.isBooked ? "btn-disabled" : "btn-primary"}>Book</Link>
           )
         }
       </div>
