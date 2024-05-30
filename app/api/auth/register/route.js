@@ -18,8 +18,6 @@ export const POST = async (request) => {
 
     try {
         const res = await userModel.create(newUser);
-        console.log(res);
-        console.log(res.status, "yooooooooooooooooooooooo status");
         return new NextResponse("User created successfully", {
             status: 201
         })

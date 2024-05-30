@@ -1,18 +1,20 @@
 import HotelSummaryInfo from '@/components/hotel/HotelSummaryInfo'
 import Gallery from '@/components/hotel/details/Gallery'
 import Overview from '@/components/hotel/details/Overview'
-import React from 'react'
+import { getHotelById } from '@/database/query'
 
-export default function DetailsPage() {
+export default async function DetailsPage({params: {hotelId}}) {
+    const hotelInfo = await getHotelById(hotelId);
+    
     return (
         <>
             <section className="py-4 mt-[100px] ">
                 <div className="flex container">
-                    <HotelSummaryInfo />
+                    <HotelSummaryInfo info={hotelInfo} />
                 </div>
             </section>
-            <Gallery />
-            <Overview />
+            <Gallery gallery={hotelInfo?.gallery} />
+            <Overview overview={hotelInfo?.overview} />
         </>
     )
 }

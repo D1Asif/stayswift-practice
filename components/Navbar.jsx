@@ -6,7 +6,7 @@ import Logout from "./auth/Logout";
 
 const Navbar = async ({ fromAuth }) => {
   const session = await auth();
-  console.log(session?.user);
+  
   return (
     <nav>
       <Link href="/">

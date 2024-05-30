@@ -1,14 +1,30 @@
-const Gallery = () => {
+import Image from "next/image";
+
+const Gallery = ({gallery}) => {
+  const [mainPic, ...restGallery] = gallery;
   return (
     <section className="container">
       <div className="grid grid-cols-2 imageshowCase">
-        <img src="./assets/images/1.png" className="h-[400px]" alt="" />
+        <Image 
+          src={mainPic} 
+          className="h-[400px]" 
+          alt="Main Picture"
+          height={400}
+          width={400} 
+        />
 
         <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
-          <img src="./assets/images/2.png" alt="" />
-          <img src="./assets/images/3.png" alt="" />
-          <img src="./assets/images/4.png" alt="" />
-          <img src="./assets/images/5.png" alt="" />
+          {
+            restGallery?.map((subPic) => (
+              <Image
+                key={subPic} 
+                src={subPic}
+                alt="Sub Pic"
+                height={400}
+                width={400}
+              />
+            ))
+          }
         </div>
       </div>
     </section>
