@@ -33,9 +33,6 @@ const Search = ({ fromList }) => {
     setSearchTerm(state);
   }
 
-  console.log(searchTerm);
-  console.log(fromList);
-
   const handleSearch = (e) => {
     const newSearchParams = new URLSearchParams(searchTerm);
     if (!searchTerm.destination) {
